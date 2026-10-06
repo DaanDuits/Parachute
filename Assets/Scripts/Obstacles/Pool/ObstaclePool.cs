@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FoGD.Obstacles
+namespace FoGD.Obstacles.Pool
 {
     public class ObstaclePool
     {
         private int _maxSize;
-        private List<Obstacle> _pool;
-        private Obstacle _latest;
-        private Func<Obstacle> _createFunc;
+        private List<FallingObstacle> _pool;
+        private FallingObstacle _latest;
+        private Func<FallingObstacle> _createFunc;
 
         public int Count
         {
@@ -22,10 +22,10 @@ namespace FoGD.Obstacles
         public int InactiveCount
         { get => _pool.Count + (_latest == null ? 1 : 0); }
 
-        public ObstaclePool(int size, Func<Obstacle> createFunc)
+        public ObstaclePool(int size, Func<FallingObstacle> createFunc)
         {
             _maxSize = size;
-            _pool = new List<Obstacle>(size);
+            _pool = new List<FallingObstacle>(size);
             _createFunc = createFunc;
         }
 
@@ -33,9 +33,9 @@ namespace FoGD.Obstacles
         /// Take an obstacle from the pool
         /// </summary>
         /// <returns></returns>
-        public Obstacle Take()
+        public FallingObstacle Take()
         {
-            Obstacle obstacle = null;
+            FallingObstacle obstacle = null;
             if (_latest != null)
             {
                 obstacle = _latest;
@@ -62,7 +62,7 @@ namespace FoGD.Obstacles
         /// </summary>
         /// <param name="obstacle">The obstacle to be put back</param>
         /// <exception cref="InvalidOperationException">Trying to release an already released obstacle</exception>
-        public void Release(Obstacle obstacle)
+        public void Release(FallingObstacle obstacle)
         {
             if (_pool.Count > 0 || _latest != null)
             {

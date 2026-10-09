@@ -46,6 +46,9 @@ namespace FoGD.Obstacles
             Context.DestroyObstacle(this);
         }
 
+        /// <summary>
+        /// OnHitPlayer is called when the obstacle hits the player
+        /// </summary>
         protected abstract void OnHitPlayer();
     }
 }

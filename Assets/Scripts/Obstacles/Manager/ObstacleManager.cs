@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using FoGD.Obstacles.Factory;
+using FoGD.UI.Behaviour;
 
 namespace FoGD.Obstacles.Manager
 {
@@ -15,10 +16,18 @@ namespace FoGD.Obstacles.Manager
 
         [Header("Obstacle Properties")]
         [SerializeField] private float spawnTime = 2f;
-        [SerializeField] private ObstacleFactory.Settings factorySettings;
+        [Tooltip("All prefabs for the obstacle types")][SerializeField] private ObstacleFactory.Settings factorySettings;
+
+        [Header("UI")]
+        [SerializeField] private LevelUI levelUI;
 
         private FallingObstacle _currentObstacle;
         private ObstacleFactory _factory;
+
+        public LevelUI LevelUI
+        {
+            get => levelUI;
+        }
 
         private void Awake()
         {

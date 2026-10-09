@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c6b7ba63b7ab44a8f2609b0cf61f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.Player.PlayerMovement
-  speed: 12
+  speed: 16
   minX: -7
   maxX: 7
   yPos: -2.5
@@ -509,7 +509,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 1
+  m_LinearDamping: 2
   m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}

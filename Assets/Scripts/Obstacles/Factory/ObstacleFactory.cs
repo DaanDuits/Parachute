@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace FoGD.Obstacles.Factory
 {
-
     public class ObstacleFactory
     {
         private enum EObstacleType

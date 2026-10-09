@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using FoGD.Obstacles.Factory;
-using FoGD.Obstacles.Pool;
 
 namespace FoGD.Obstacles.Manager
 {
@@ -16,17 +15,13 @@ namespace FoGD.Obstacles.Manager
 
         [Header("Obstacle Properties")]
         [SerializeField] private float spawnTime = 2f;
-        [SerializeField] private int poolSize = 30;
         [SerializeField] private ObstacleFactory.Settings factorySettings;
 
         private FallingObstacle _currentObstacle;
-
-        private ObstaclePool _pool;
         private ObstacleFactory _factory;
 
         private void Awake()
         {
-            _pool = new ObstaclePool(poolSize, CreateObstacle);
             _factory = new ObstacleFactory(factorySettings);
 
             SetRandomObstacle();
@@ -37,7 +32,7 @@ namespace FoGD.Obstacles.Manager
         {
             while (true)
             {
-                FallingObstacle current = _pool.Take();
+                FallingObstacle current = CreateObstacle();
                 current.Context = this;
                 current.transform.position = RandomStartPos();
 
@@ -75,7 +70,7 @@ namespace FoGD.Obstacles.Manager
         }
         public void DestroyObstacle(FallingObstacle target)
         {
-            _pool.Release(target);
+            Destroy(target.gameObject);
         }
     }
 }

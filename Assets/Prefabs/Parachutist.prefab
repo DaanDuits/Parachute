@@ -144,4 +144,6 @@ MonoBehaviour:
   velocityY: 3
   minVelocityX: -4
   maxVelocityX: 4
+  minPosX: -7
+  maxPosX: 7
   minHeight: -6

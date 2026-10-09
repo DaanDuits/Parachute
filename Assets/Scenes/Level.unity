@@ -373,8 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.Player.PlayerMovement
   speed: 16
-  minX: -7
-  maxX: 7
+  xPosRange: {x: -7, y: 7}
   yPos: -2.5
 --- !u!61 &694781183
 BoxCollider2D:
@@ -592,7 +591,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Constraints: 6
 --- !u!1 &1967044488
 GameObject:
   m_ObjectHideFlags: 0

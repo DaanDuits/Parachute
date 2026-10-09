@@ -6,12 +6,12 @@ namespace FoGD.Obstacles
     [RequireComponent(typeof(CircleCollider2D))]
     public abstract class FallingObstacle : MonoBehaviour
     {
-        [SerializeField] private float velocityY = 3;
-        [SerializeField] private float minVelocityX = -4, maxVelocityX = 4;
-        [SerializeField] private float minPosX = -6, maxPosX = 6;
-        [SerializeField] private float minHeight = -6;
+        [SerializeField] private float yVelocity = 3f;
+        [SerializeField] private Vector2 xVelocityRange = new Vector2(-4f, 4f);
+        [SerializeField] private Vector2 xPosRange = new Vector2(-6f, 6f);
+        [SerializeField] private float minYPos = -6f;
 
-        private float _velocityX;
+        private float _xVelocity;
 
         private float _radius;
 
@@ -23,18 +23,23 @@ namespace FoGD.Obstacles
 
         private void OnEnable()
         {
-            _velocityX = Random.Range(minVelocityX, maxVelocityX);
+            // Initialize values
+            _xVelocity = Random.Range(xVelocityRange.x, xVelocityRange.y);
             _radius = GetComponent<CircleCollider2D>().radius;
         }
 
         private void Update()
         {
-            if (transform.position.x - _radius <= minPosX || transform.position.x + _radius >= maxPosX)
-                _velocityX = -_velocityX;
+            // Check if collider is in bounds, flip the x velocity
+            if ((transform.position.x - _radius <= xPosRange.x && _xVelocity < 0f) || 
+                (transform.position.x + _radius >= xPosRange.y && _xVelocity > 0f))
+                _xVelocity = -_xVelocity;
 
-            transform.position += Vector3.down * (velocityY * Time.deltaTime) + Vector3.right * (_velocityX * Time.deltaTime);
+            // Move the obstacle based on x and y velocity
+            transform.position += Vector3.down * (yVelocity * Time.deltaTime) + Vector3.right * (_xVelocity * Time.deltaTime);
 
-            if (transform.position.y <= minHeight)
+            // Destroy if below minimum y position
+            if (transform.position.y <= minYPos)
                 Context.DestroyObstacle(this);
         }
 
@@ -42,6 +47,7 @@ namespace FoGD.Obstacles
         {
             if (other.transform.position.y > transform.position.y)
                 return;
+
             OnHitPlayer();
             Context.DestroyObstacle(this);
         }

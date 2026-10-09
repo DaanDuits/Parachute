@@ -141,9 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168ee455b077f5e40b5e10bd2f15e5a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.Obstacles.HealthCrate
-  velocityY: 3
-  minVelocityX: -4
-  maxVelocityX: 4
-  minPosX: -7
-  maxPosX: 7
-  minHeight: -6
+  yVelocity: 3
+  xVelocityRange: {x: -4, y: 4}
+  xPosRange: {x: -7, y: 7}
+  minYPos: -6

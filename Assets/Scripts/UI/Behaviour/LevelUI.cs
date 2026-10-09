@@ -7,16 +7,22 @@ namespace FoGD.UI.Behaviour
     {
         [SerializeField] private string scoreName = "Score";
 
-
         private Label _scoreLabel;
         private string _scoreText;
         private int _score = 0;
 
         private void Awake()
         {
-            _scoreText = scoreName + ":";
+            // Initialize values
+            _scoreText = scoreName + ": ";
             _scoreLabel = Root.Q<Label>("score-text");
-            _scoreLabel.text = _scoreText;
+            UpdateScore();
+        }
+
+        private void UpdateScore()
+        {
+            // Update the label to the correct score
+            _scoreLabel.text = _scoreText + _score;
         }
 
         /// <summary>
@@ -26,7 +32,7 @@ namespace FoGD.UI.Behaviour
         public void AddScore(int amount)
         {
             _score += amount;
-            _scoreLabel.text = _scoreText + " " + _score;
+            UpdateScore();
         }
 
         /// <summary>
@@ -36,7 +42,7 @@ namespace FoGD.UI.Behaviour
         public void RemoveScore(int amount)
         {
             _score -= amount;
-            _scoreLabel.text = _scoreText + " " + _score;
+            UpdateScore();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace FoGD.Obstacles.Factory
 
         public ObstacleFactory(Settings settings)
         {
+            // Set all obstacle types with their prefab
             _obstacles = new Dictionary<EObstacleType, FallingObstacle>
             {
                 { EObstacleType.Parachutist, settings.parachutist },

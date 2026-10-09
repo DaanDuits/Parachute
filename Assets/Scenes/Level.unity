@@ -636,8 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.ObstacleManager
   spawnPosY: 8
-  minSpawnPosX: -6
-  maxSpawnPosX: 6
+  xSpawnPosRange: {x: -5, y: 5}
   spawnTime: 2
   factorySettings:
     parachutist: {fileID: 6957992820149366975, guid: ae0e655763962c84f81524eaccb0b77d, type: 3}

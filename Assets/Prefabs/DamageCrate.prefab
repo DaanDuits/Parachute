@@ -141,3 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9d8377cd266ed428795ebe7849f26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.Obstacles.DamageCrate
+  velocityY: 3
+  minVelocityX: -4
+  maxVelocityX: 4
+  minHeight: -6

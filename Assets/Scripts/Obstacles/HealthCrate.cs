@@ -4,7 +4,7 @@ namespace FoGD.Obstacles
     {
         protected override void OnHitPlayer()
         {
-            Context.LevelUI.AddScore(100);
+            GameManager.Instance.AddScore(100);
         }
     }
 }

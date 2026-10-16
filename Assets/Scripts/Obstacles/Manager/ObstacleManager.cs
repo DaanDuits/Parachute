@@ -15,16 +15,8 @@ namespace FoGD.Obstacles.Manager
         [SerializeField] private float spawnTime = 2f;
         [Tooltip("All prefabs for the obstacle types")][SerializeField] private ObstacleFactory.Settings factorySettings;
 
-        [Header("UI")]
-        [SerializeField] private LevelUI levelUI;
-
         private FallingObstacle _currentObstacle;
         private ObstacleFactory _factory;
-
-        public LevelUI LevelUI
-        {
-            get => levelUI;
-        }
 
         private void Awake()
         {

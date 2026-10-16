@@ -4,7 +4,7 @@ namespace FoGD.Obstacles
     {
         protected override void OnHitPlayer()
         {
-            Context.LevelUI.RemoveScore(50);
+            GameManager.Instance.RemoveScore(50);
         }
     }
 }

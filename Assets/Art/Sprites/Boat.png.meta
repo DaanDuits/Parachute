@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0677e78fa05141945a002db836a2d733
+guid: 1d68b2ffc62e58440b593e9832ee88c4
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -103,10 +103,10 @@ TextureImporter:
       name: Boat_512_0
       rect:
         serializedVersion: 2
-        x: 195
-        y: 100
-        width: 625
-        height: 345
+        x: 70
+        y: 121
+        width: 378
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

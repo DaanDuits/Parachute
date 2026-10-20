@@ -12,17 +12,23 @@ namespace FoGD.Obstacles.Manager
         [SerializeField] private Vector2 xSpawnPosRange = new Vector2(-5f, 5f);
 
         [Header("Obstacle Properties")]
-        [SerializeField] private float spawnTime = 2f;
+        [SerializeField] private float spawnSpeed = 2f;
+        [SerializeField] private float startSpawnTime = 2f;
         [Tooltip("All prefabs for the obstacle types")][SerializeField] private ObstacleFactory.Settings factorySettings;
+        [Space]
+        [Tooltip("The maximum change of a damage crate spawning")][Range(0f, 1f)][SerializeField] private float damageCrateSpawnChange = 0.2f;
+        [Space]
+        [Tooltip("The maximum change of a health crate spawning")][Range(0f, 1f)][SerializeField] private float healthCrateSpawnChange = 0.1f;
 
-        private FallingObstacle _currentObstacle;
+        private float _spawnTime;
+
         private ObstacleFactory _factory;
 
         private void Awake()
         {
             _factory = new ObstacleFactory(factorySettings);
 
-            SetRandomObstacle();
+            _spawnTime = startSpawnTime;
             StartCoroutine(SpawnLoop());
         }
 
@@ -31,14 +37,12 @@ namespace FoGD.Obstacles.Manager
             while (true)
             {
                 // Create a new obstacle and set it's properties
-                FallingObstacle current = CreateObstacle();
+                FallingObstacle current = GetObstacle();
                 current.Context = this;
                 current.transform.position = RandomStartPos();
 
-                yield return new WaitForSeconds(spawnTime);
-
-                // Set a new random obstacle type
-                SetRandomObstacle();
+                yield return new WaitForSeconds(_spawnTime);
+                _spawnTime = Mathf.PerlinNoise1D(Time.time) * spawnSpeed;
             }
         }
 
@@ -47,28 +51,27 @@ namespace FoGD.Obstacles.Manager
             return new Vector3(Random.Range(xSpawnPosRange.x, xSpawnPosRange.y), spawnPosY, 0);
         }
 
-        private void SetRandomObstacle()
+        private FallingObstacle GetObstacle()
         {
-            // Get a new random obstacle
-            int random = Random.Range(0, 3);
-            switch (random)
-            {
-                case 0:
-                    _currentObstacle = _factory.Parachutist();
-                    break;
-                case 1:
-                    _currentObstacle = _factory.HealthCrate();
-                    break;
-                case 2:
-                    _currentObstacle = _factory.DamageCrate();
-                    break;
-            }
+            FallingObstacle obstacle = _factory.Parachutist();
+            float random = Random.Range(0f, 1f);
+            
+            // Calculate the damage crate spawn change based on the score percentage using an ease in curve
+            float damageCrateChange = Mathf.Clamp(Mathf.Pow(GameManager.Instance.ScorePercentage, 2f), 0f, damageCrateSpawnChange);
+
+            // Calculate the health crate spawn change based on the inverted health percentage then use anpther ease in curve
+            float healthInvert = 1f - GameManager.Instance.HealthPercentage;
+            float healthCrateChange = damageCrateChange + Mathf.Clamp(Mathf.Pow(healthInvert, 2f) * healthCrateSpawnChange, 0f, healthCrateSpawnChange);
+
+            // Set the correct obstacle
+            if (random <= damageCrateChange)
+                obstacle = _factory.DamageCrate();
+            else if (random < healthCrateChange)
+                obstacle = _factory.HealthCrate();
+
+            return Instantiate(obstacle, transform);
         }
 
-        private FallingObstacle CreateObstacle()
-        {
-            return Instantiate(_currentObstacle, transform);
-        }
         public void DestroyObstacle(FallingObstacle target)
         {
             Destroy(target.gameObject);

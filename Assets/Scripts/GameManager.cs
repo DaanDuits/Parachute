@@ -5,9 +5,12 @@ namespace FoGD
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private LevelUI levelUI;
+        [SerializeField] private int maxScore = 5000;
+        [Space]
         [SerializeField] private int maxHealth = 3;
         [SerializeField] private int startHealth = 3;
+        [Space]
+        [SerializeField] private LevelUI levelUI;
 
         private int _score = 0;
 
@@ -15,6 +18,21 @@ namespace FoGD
 
         public static GameManager Instance 
         { get; private set; }
+
+        public float ScorePercentage
+        {
+            get
+            {
+                return _score / (float)maxScore;
+            }
+        }
+        public float HealthPercentage
+        {
+            get
+            {
+                return (_health - 1) / (float)maxHealth;
+            }
+        }
 
         private void Awake()
         {

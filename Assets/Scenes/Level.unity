@@ -802,6 +802,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de37abb5b99186947aad1a66790cb688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.GameManager
+  maxScore: 5000
+  maxHealth: 3
+  startHealth: 3
   levelUI: {fileID: 1067806846}
 --- !u!4 &1923771866
 Transform:
@@ -864,11 +867,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.ObstacleManager
   spawnPosY: 8
   xSpawnPosRange: {x: -5, y: 5}
-  spawnTime: 2
+  spawnSpeed: 3
+  startSpawnTime: 3
   factorySettings:
     parachutist: {fileID: 6957992820149366975, guid: ae0e655763962c84f81524eaccb0b77d, type: 3}
     healthCrate: {fileID: 6195217854922480530, guid: 1b4dde4b560b35e4e8241215e9b97bac, type: 3}
     damageCrate: {fileID: 8897953626232783278, guid: 297338f021bf8654d81d714df2f6b57c, type: 3}
+  damageCrateSpawnChange: 0.3
+  healthCrateSpawnChange: 0.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

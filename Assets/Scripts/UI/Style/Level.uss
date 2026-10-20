@@ -1,6 +1,13 @@
 :root {
 }
 
+.game-ui-holder {
+    top: 20px;
+    left: 20px;
+    position: absolute;
+    align-items: flex-start;
+}
+
 .score-text {
     -unity-text-outline-width: 2px;
     -unity-text-outline-color: rgb(0, 0, 0);
@@ -8,6 +15,18 @@
     color: rgb(223, 223, 223);
     text-shadow: -3.8px 1.3px 0 rgb(0, 0, 0);
     -unity-font-style: bold;
-    top: 20px;
-    left: 20px;
+}
+
+.health-holder {
+    height: 80px;
+    margin-top: 30px;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.health-icon {
+    height: 60px;
+    width: 60px;
+    background-color: rgb(77, 195, 38);
+    margin-right: 15px;
 }

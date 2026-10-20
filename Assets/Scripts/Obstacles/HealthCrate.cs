@@ -5,6 +5,7 @@ namespace FoGD.Obstacles
         protected override void OnHitPlayer()
         {
             GameManager.Instance.AddScore(100);
+            GameManager.Instance.AddHealth(1);
         }
     }
 }

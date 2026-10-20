@@ -5,6 +5,7 @@ namespace FoGD.Obstacles
         protected override void OnHitPlayer()
         {
             GameManager.Instance.RemoveScore(50);
+            GameManager.Instance.RemoveHealth(1);
         }
     }
 }

@@ -6,14 +6,19 @@ namespace FoGD
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private LevelUI levelUI;
+        [SerializeField] private int maxHealth = 3;
+        [SerializeField] private int startHealth = 3;
 
         private int _score = 0;
+
+        private int _health = 0;
 
         public static GameManager Instance 
         { get; private set; }
 
         private void Awake()
         {
+            // Setup singleton
             if (Instance != null)
             {
                 Destroy(gameObject);
@@ -25,7 +30,10 @@ namespace FoGD
 
         private void Start()
         {
+            AddHealth(startHealth);
+
             levelUI.SetScoreText(_score);
+            levelUI.SetHealthIcons(_health);
         }
 
         /// <summary>
@@ -37,7 +45,6 @@ namespace FoGD
             _score += amount;
             levelUI.SetScoreText(_score);
         }
-
         /// <summary>
         /// Subtract amount from the current score
         /// </summary>
@@ -46,6 +53,27 @@ namespace FoGD
         {
             _score -= amount;
             levelUI.SetScoreText(_score);
+        }
+
+        /// <summary>
+        /// Add amount to the current health value
+        /// </summary>
+        /// <param name="amount">The amount added to the health value</param>
+        public void AddHealth(int amount)
+        {
+            _health += amount;
+            _health = Mathf.Clamp(_health, 0, maxHealth);
+            levelUI.SetHealthIcons(_health);
+        }
+        /// <summary>
+        /// Subtract amount from the current health value
+        /// </summary>
+        /// <param name="amount">The amount subtracted from the health value</param>
+        public void RemoveHealth(int amount)
+        {
+            _health -= amount;
+            _health = Mathf.Clamp(_health, 0, maxHealth);
+            levelUI.SetHealthIcons(_health);
         }
     }
 }

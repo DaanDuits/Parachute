@@ -20,8 +20,6 @@ namespace FoGD.UI.Behaviour
             _scoreLabel = Root.Q<Label>("score-text");
 
             _healthHolder = Root.Q<VisualElement>("health-holder");
-
-            SetHealthIcons(4);
         }
 
         public void SetScoreText(int score)

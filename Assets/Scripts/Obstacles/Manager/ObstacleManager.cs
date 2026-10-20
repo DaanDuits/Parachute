@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using FoGD.Obstacles.Factory;
+using FoGD.Obstacles.Bank;
 using FoGD.UI.Behaviour;
 
 namespace FoGD.Obstacles.Manager
@@ -14,7 +14,7 @@ namespace FoGD.Obstacles.Manager
         [Header("Obstacle Properties")]
         [SerializeField] private float spawnSpeed = 2f;
         [SerializeField] private float startSpawnTime = 2f;
-        [Tooltip("All prefabs for the obstacle types")][SerializeField] private ObstacleFactory.Settings factorySettings;
+        [Tooltip("All prefabs for the obstacle types")][SerializeField] private ObstacleBank.Settings factorySettings;
         [Space]
         [Tooltip("The maximum change of a damage crate spawning")][Range(0f, 1f)][SerializeField] private float damageCrateSpawnChange = 0.2f;
         [Space]
@@ -22,11 +22,11 @@ namespace FoGD.Obstacles.Manager
 
         private float _spawnTime;
 
-        private ObstacleFactory _factory;
+        private ObstacleBank _bank;
 
         private void Awake()
         {
-            _factory = new ObstacleFactory(factorySettings);
+            _bank = new ObstacleBank(factorySettings);
 
             _spawnTime = startSpawnTime;
             StartCoroutine(SpawnLoop());
@@ -53,7 +53,7 @@ namespace FoGD.Obstacles.Manager
 
         private FallingObstacle GetObstacle()
         {
-            FallingObstacle obstacle = _factory.Parachutist();
+            FallingObstacle obstacle = _bank.Parachutist();
             float random = Random.Range(0f, 1f);
             
             // Calculate the damage crate spawn change based on the score percentage using an ease in curve
@@ -65,9 +65,9 @@ namespace FoGD.Obstacles.Manager
 
             // Set the correct obstacle
             if (random <= damageCrateChange)
-                obstacle = _factory.DamageCrate();
+                obstacle = _bank.DamageCrate();
             else if (random < healthCrateChange)
-                obstacle = _factory.HealthCrate();
+                obstacle = _bank.HealthCrate();
 
             return Instantiate(obstacle, transform);
         }

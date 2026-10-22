@@ -220,6 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 344083520}
   - component: {fileID: 344083519}
+  - component: {fileID: 344083521}
   - component: {fileID: 344083518}
   m_Layer: 0
   m_Name: Shark
@@ -241,12 +242,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.SharkBehaviour
   xPosRange: {x: -8, y: 8}
+  yPosRange: {x: -4, y: 3}
   swimSpeed: 5
-  startX: 8
-  endX: -8
-  startHeight: -3
-  endHeight: 6
-  jumpTime: 2
+  jumpSpeed: 3
+  aggroToJump: 0.15
 --- !u!212 &344083519
 SpriteRenderer:
   serializedVersion: 2
@@ -315,12 +314,48 @@ Transform:
   m_GameObject: {fileID: 344083517}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5, y: -4, z: 0}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 581341968}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &344083521
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344083517}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 1.02, y: 0}
+  m_Radius: 0.6
 --- !u!1 &509251212
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +1018,7 @@ MonoBehaviour:
   maxScore: 5000
   maxHealth: 3
   startHealth: 3
+  playerTransform: {fileID: 694781185}
   levelUI: {fileID: 1067806846}
 --- !u!4 &1923771866
 Transform:

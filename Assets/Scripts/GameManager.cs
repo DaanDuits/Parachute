@@ -9,6 +9,7 @@ namespace FoGD
         [Space]
         [SerializeField] private int maxHealth = 3;
         [SerializeField] private int startHealth = 3;
+        [SerializeField] private Transform playerTransform;
         [Space]
         [SerializeField] private LevelUI levelUI;
 
@@ -33,6 +34,8 @@ namespace FoGD
                 return (_health - 1) / (float)maxHealth;
             }
         }
+        public Vector3 PlayerPosition
+        { get => playerTransform.position; }
 
         private void Awake()
         {

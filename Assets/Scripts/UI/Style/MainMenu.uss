@@ -1,0 +1,30 @@
+:root {
+}
+
+.main-menu-holder {
+    align-self: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.button-holder {
+    width: 200px;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+}
+
+
+
+
+
+.title {
+    -unity-text-align: upper-center;
+    font-size: 52px;
+    -unity-font-style: bold;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 3px;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=d05494c902230d84fb4a7d7c2ddc01ec&type=3#NotInter-Regular");
+    color: rgb(238, 238, 238);
+}

@@ -11,7 +11,9 @@ namespace FoGD
         [SerializeField] private int startHealth = 3;
         [SerializeField] private Transform playerTransform;
         [Space]
+        [Header("UI")]
         [SerializeField] private LevelUI levelUI;
+        [SerializeField] private WinLoseScreenUI winLoseScreenUI;
 
         private int _score = 0;
 
@@ -65,6 +67,9 @@ namespace FoGD
         {
             _score += amount;
             levelUI.SetScoreText(_score);
+
+            if (_score >= maxScore)
+                winLoseScreenUI.Win();
         }
         /// <summary>
         /// Subtract amount from the current score
@@ -95,6 +100,9 @@ namespace FoGD
             _health -= amount;
             _health = Mathf.Clamp(_health, 0, maxHealth);
             levelUI.SetHealthIcons(_health);
+
+            if (_health == 0)
+                winLoseScreenUI.Lose();
         }
     }
 }

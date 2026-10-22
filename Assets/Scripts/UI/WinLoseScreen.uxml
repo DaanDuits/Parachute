@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement class="screen-holder" style="flex-grow: 1;">
+        <ui:VisualElement class="panel-holder">
+            <ui:Label text="You Won" name="condition-text" class="condition-text"/>
+            <ui:Button text="Retry" name="retry-button"/>
+            <ui:Button text="Main Menu" name="main-menu-button"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

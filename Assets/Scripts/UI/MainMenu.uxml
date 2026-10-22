@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Style/MainMenu.uss?fileID=7433441132597879392&amp;guid=da19bb61e4322b04bb095e4d9955a422&amp;type=3#MainMenu"/>
+    <ui:VisualElement class="main-menu-holder" style="flex-grow: 1;">
+        <ui:VisualElement class="button-holder">
+            <ui:Label text="PARACHUTE" class="title"/>
+            <ui:Button text="Play" name="play-button"/>
+            <ui:Button text="Quit" name="quit-button"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

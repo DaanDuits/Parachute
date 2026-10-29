@@ -59,7 +59,14 @@ namespace FoGD.Shark
             CurrentState.EnterState();
 
             _renderer = GetComponent<SpriteRenderer>();
-            _collider = GetComponent<CircleCollider2D>();   
+            _collider = GetComponent<CircleCollider2D>();
+            EnableCollider(false);
+        }
+
+        private void Start()
+        {
+            GameManager.Instance.OnWin.AddListener(() => { Destroy(gameObject); });
+            GameManager.Instance.OnLose.AddListener(() => { Destroy(gameObject); });
         }
 
         private void Update()
@@ -74,6 +81,7 @@ namespace FoGD.Shark
         {
             _direction *= -1;
             _renderer.flipX = _direction == -1;
+            _collider.offset = new Vector2(_direction, 0f);
         }
 
         public void EnableCollider(bool enabled)

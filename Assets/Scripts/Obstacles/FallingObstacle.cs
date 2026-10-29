@@ -1,11 +1,12 @@
-using FoGD.Obstacles.Manager;
 using UnityEngine;
+using FoGD.Obstacles.Manager;
 
 namespace FoGD.Obstacles
 {
     [RequireComponent(typeof(CircleCollider2D))]
     public abstract class FallingObstacle : MonoBehaviour
     {
+        [SerializeField] private int score = 100;
         [SerializeField] private float yVelocity = 3f;
         [SerializeField] private Vector2 xVelocityRange = new Vector2(-4f, 4f);
         [SerializeField] private Vector2 xPosRange = new Vector2(-6f, 6f);
@@ -20,6 +21,9 @@ namespace FoGD.Obstacles
             protected get;
             set;
         }
+
+        protected int Score
+        { get => score; }
 
         private void OnEnable()
         {

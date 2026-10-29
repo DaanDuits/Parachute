@@ -22,6 +22,12 @@ namespace FoGD.UI.Behaviour
             _healthHolder = Root.Q<VisualElement>("health-holder");
         }
 
+        private void Start()
+        {
+            GameManager.Instance.OnScoreChanged.AddListener(SetScoreText);
+            GameManager.Instance.OnHealthChanged.AddListener(SetHealthIcons);
+        }
+
         public void SetScoreText(int score)
         {
             // Update the label to the correct score

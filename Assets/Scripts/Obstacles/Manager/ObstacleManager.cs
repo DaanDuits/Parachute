@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using FoGD.Obstacles.Bank;
-using FoGD.UI.Behaviour;
 
 namespace FoGD.Obstacles.Manager
 {
@@ -24,12 +23,21 @@ namespace FoGD.Obstacles.Manager
 
         private ObstacleBank _bank;
 
+        private IEnumerator _activeCoroutine;
+
         private void Awake()
         {
             _bank = new ObstacleBank(factorySettings);
 
             _spawnTime = startSpawnTime;
-            StartCoroutine(SpawnLoop());
+
+            _activeCoroutine = SpawnLoop();
+            StartCoroutine(_activeCoroutine);
+        }
+        private void Start()
+        {
+            GameManager.Instance.OnLose.AddListener(Stop);
+            GameManager.Instance.OnWin.AddListener(Stop);
         }
 
         private IEnumerator SpawnLoop()
@@ -75,6 +83,19 @@ namespace FoGD.Obstacles.Manager
         public void DestroyObstacle(FallingObstacle target)
         {
             Destroy(target.gameObject);
+        }
+
+        /// <summary>
+        /// Stop spawning obstacles
+        /// </summary>
+        public void Stop()
+        {
+            StopCoroutine(_activeCoroutine);
+            
+            foreach(Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 }

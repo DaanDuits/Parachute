@@ -1,5 +1,7 @@
 using UnityEngine;
 using FoGD.UI.Behaviour;
+using FoGD.Obstacles.Manager;
+using UnityEngine.Events;
 
 namespace FoGD
 {
@@ -10,10 +12,10 @@ namespace FoGD
         [SerializeField] private int maxHealth = 3;
         [SerializeField] private int startHealth = 3;
         [SerializeField] private Transform playerTransform;
-        [Space]
-        [Header("UI")]
-        [SerializeField] private LevelUI levelUI;
-        [SerializeField] private WinLoseScreenUI winLoseScreenUI;
+
+        private UnityEvent onLose = new UnityEvent(), onWin = new UnityEvent();
+        private UnityEvent<int> onScoreChanged = new UnityEvent<int>();
+        private UnityEvent<int> onHealthChanged = new UnityEvent<int>();
 
         private int _score = 0;
 
@@ -39,6 +41,16 @@ namespace FoGD
         public Vector3 PlayerPosition
         { get => playerTransform.position; }
 
+        public UnityEvent OnWin
+        { get => onWin; }
+        public UnityEvent OnLose
+        { get => onLose; }
+        public UnityEvent<int> OnScoreChanged
+        { get => onScoreChanged; }
+        public UnityEvent<int> OnHealthChanged
+        { get => onHealthChanged; }
+
+
         private void Awake()
         {
             // Setup singleton
@@ -55,8 +67,8 @@ namespace FoGD
         {
             AddHealth(startHealth);
 
-            levelUI.SetScoreText(_score);
-            levelUI.SetHealthIcons(_health);
+            onScoreChanged.Invoke(_score);
+            onHealthChanged.Invoke(_health);
         }
 
         /// <summary>
@@ -66,10 +78,10 @@ namespace FoGD
         public void AddScore(int amount)
         {
             _score += amount;
-            levelUI.SetScoreText(_score);
+            onScoreChanged.Invoke(_score);
 
             if (_score >= maxScore)
-                winLoseScreenUI.Win();
+                onWin.Invoke();
         }
         /// <summary>
         /// Subtract amount from the current score
@@ -78,7 +90,7 @@ namespace FoGD
         public void RemoveScore(int amount)
         {
             _score -= amount;
-            levelUI.SetScoreText(_score);
+            onScoreChanged.Invoke(_score);
         }
 
         /// <summary>
@@ -88,8 +100,8 @@ namespace FoGD
         public void AddHealth(int amount)
         {
             _health += amount;
-            _health = Mathf.Clamp(_health, 0, maxHealth);
-            levelUI.SetHealthIcons(_health);
+            _health = Mathf.Clamp(_health, 0, maxHealth); 
+            onHealthChanged.Invoke(_health);
         }
         /// <summary>
         /// Subtract amount from the current health value
@@ -99,10 +111,10 @@ namespace FoGD
         {
             _health -= amount;
             _health = Mathf.Clamp(_health, 0, maxHealth);
-            levelUI.SetHealthIcons(_health);
+            onHealthChanged.Invoke(_health);
 
             if (_health == 0)
-                winLoseScreenUI.Lose();
+                onLose.Invoke();
         }
     }
 }

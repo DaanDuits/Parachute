@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9d8377cd266ed428795ebe7849f26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.Obstacles.DamageCrate
+  score: 150
   yVelocity: 3
   xVelocityRange: {x: -4, y: 4}
   xPosRange: {x: -7, y: 7}

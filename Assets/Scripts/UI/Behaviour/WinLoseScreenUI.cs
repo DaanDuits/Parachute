@@ -13,6 +13,11 @@ namespace FoGD.UI.Behaviour
         {
             Document.enabled = false;
         }
+        private void Start()
+        {
+            GameManager.Instance.OnLose.AddListener(Lose);
+            GameManager.Instance.OnWin.AddListener(Win);
+        }
 
         private void Retry()
         {

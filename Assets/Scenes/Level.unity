@@ -837,8 +837,6 @@ MonoBehaviour:
   maxHealth: 3
   startHealth: 3
   playerTransform: {fileID: 694781185}
-  levelUI: {fileID: 1067806846}
-  winLoseScreenUI: {fileID: 2037102840}
 --- !u!4 &1923771866
 Transform:
   m_ObjectHideFlags: 0

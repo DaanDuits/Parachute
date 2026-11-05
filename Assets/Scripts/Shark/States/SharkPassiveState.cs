@@ -31,6 +31,8 @@ namespace FoGD.Shark.States
             _timer += Time.deltaTime / Context.SwimSpeed;
             _timer = Mathf.Clamp01(_timer);
 
+            Context.DepleteHunger();
+
             if (_timer == 1f)
             {
                 Context.Flip();
@@ -42,13 +44,11 @@ namespace FoGD.Shark.States
 
         protected override void CheckSwitchStates()
         {
-            // Calculate aggression
-            Context.Aggression = Mathf.PerlinNoise1D(Time.time + 150f);
-
-            if (Context.Aggression <= Context.AggroToJump)
-            {
+            // Switch state when stunned or hungry
+            if (Context.IsStunned)
+                SwitchState(Bank.StunnedState());
+            else if (Context.Hunger <= Context.HungerRamp * Context.MaxHunger)
                 SwitchState(Bank.AggressiveState());
-            }
         }
     }
 }

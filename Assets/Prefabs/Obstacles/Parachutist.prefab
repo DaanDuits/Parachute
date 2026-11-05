@@ -141,6 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd35dd7e3bc86341a33421fb3bb2d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.Obstacles.Parachutist
+  score: 100
+  missPenalty: 50
+  sharkHungerValue: 15
+  sharkStunAmount: 0
   yVelocity: 3
   xVelocityRange: {x: -4, y: 4}
   xPosRange: {x: -7, y: 7}

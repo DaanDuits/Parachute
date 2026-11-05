@@ -2,6 +2,7 @@ using UnityEngine;
 using FoGD.UI.Behaviour;
 using FoGD.Obstacles.Manager;
 using UnityEngine.Events;
+using FoGD.Obstacles;
 
 namespace FoGD
 {
@@ -12,7 +13,8 @@ namespace FoGD
         [SerializeField] private int maxHealth = 3;
         [SerializeField] private int startHealth = 3;
         [SerializeField] private Transform playerTransform;
-
+        [SerializeField] private ObstacleManager obstacleManager;
+ 
         private UnityEvent onLose = new UnityEvent(), onWin = new UnityEvent();
         private UnityEvent<int> onScoreChanged = new UnityEvent<int>();
         private UnityEvent<int> onHealthChanged = new UnityEvent<int>();
@@ -23,6 +25,9 @@ namespace FoGD
 
         public static GameManager Instance 
         { get; private set; }
+
+        public ObstacleManager ObstacleManager
+        { get => obstacleManager; }
 
         public float ScorePercentage
         {

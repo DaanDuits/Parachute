@@ -54,7 +54,7 @@ namespace FoGD.Shark.States
 
             if (_timer == 1f)
             {
-                SwitchState(Bank.PassiveState());
+                CheckSwitchStates();
                 _timer = 0f;
             }
         }
@@ -63,6 +63,18 @@ namespace FoGD.Shark.States
             // Reset rotation
             Context.Rotation = Quaternion.identity;
             Context.EnableCollider(false);
+        }
+
+        protected override void CheckSwitchStates()
+        {
+            float cooldown = Random.value * Context.JumpCooldown;
+            Context.IsStunned = true;
+            Context.StunTime = cooldown;
+
+            if (Context.IsStunned)
+                SwitchState(Bank.StunnedState());
+            else
+                SwitchState(Bank.PassiveState());
         }
     }
 }

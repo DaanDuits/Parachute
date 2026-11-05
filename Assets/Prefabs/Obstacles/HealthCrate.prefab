@@ -142,7 +142,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoGD.Obstacles.HealthCrate
   score: 50
+  missPenalty: 0
+  sharkHungerValue: 0
+  sharkStunAmount: 0
   yVelocity: 3
   xVelocityRange: {x: -4, y: 4}
   xPosRange: {x: -7, y: 7}
   minYPos: -6
+  healthAdded: 1

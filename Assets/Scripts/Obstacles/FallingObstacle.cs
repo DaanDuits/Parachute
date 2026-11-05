@@ -7,6 +7,11 @@ namespace FoGD.Obstacles
     public abstract class FallingObstacle : MonoBehaviour
     {
         [SerializeField] private int score = 100;
+        [SerializeField] private int missPenalty = 50;
+        [Tooltip("If this obstacle implements ISharkFood this is used to replanish the shark's hunger")]
+        [SerializeField] protected float sharkHungerValue = 0f;
+        [Tooltip("If this obstacle implements ISharkStunner this is used as the time in seconds to stun the shark")]
+        [SerializeField] protected float sharkStunAmount = 0f;
         [SerializeField] private float yVelocity = 3f;
         [SerializeField] private Vector2 xVelocityRange = new Vector2(-4f, 4f);
         [SerializeField] private Vector2 xPosRange = new Vector2(-6f, 6f);
@@ -24,6 +29,8 @@ namespace FoGD.Obstacles
 
         protected int Score
         { get => score; }
+        protected int MissPenalty
+        { get => missPenalty; }
 
         private void OnEnable()
         {
@@ -44,7 +51,10 @@ namespace FoGD.Obstacles
 
             // Destroy if below minimum y position
             if (transform.position.y <= minYPos)
-                Context.DestroyObstacle(this);
+            {
+                OnMiss();
+                Context.DestroyObstacle(this, true);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -53,12 +63,17 @@ namespace FoGD.Obstacles
                 return;
 
             OnHitPlayer();
-            Context.DestroyObstacle(this);
+            Context.DestroyObstacle(this, false);
         }
 
         /// <summary>
         /// OnHitPlayer is called when the obstacle hits the player
         /// </summary>
         protected abstract void OnHitPlayer();
+        /// <summary>
+        /// OnMiss is called when the obstacle hits the water
+        /// </summary>
+        protected virtual void OnMiss() 
+        { }
     }
 }

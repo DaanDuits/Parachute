@@ -154,7 +154,12 @@ MonoBehaviour:
   yPosRange: {x: -4, y: 3}
   swimSpeed: 5
   jumpSpeed: 3
-  aggroToJump: 0.15
+  jumpCooldown: 2
+  maxHunger: 50
+  hungerRamp: 0.1
+  hungerDepleteRate: 2
+  damage: 1
+  scorePenalty: 100
 --- !u!212 &344083519
 SpriteRenderer:
   serializedVersion: 2
@@ -837,6 +842,7 @@ MonoBehaviour:
   maxHealth: 3
   startHealth: 3
   playerTransform: {fileID: 694781185}
+  obstacleManager: {fileID: 1967044491}
 --- !u!4 &1923771866
 Transform:
   m_ObjectHideFlags: 0
@@ -904,8 +910,8 @@ MonoBehaviour:
     parachutist: {fileID: 6957992820149366975, guid: ae0e655763962c84f81524eaccb0b77d, type: 3}
     healthCrate: {fileID: 6195217854922480530, guid: 1b4dde4b560b35e4e8241215e9b97bac, type: 3}
     damageCrate: {fileID: 8897953626232783278, guid: 297338f021bf8654d81d714df2f6b57c, type: 3}
-  damageCrateSpawnChange: 0.3
-  healthCrateSpawnChange: 0.1
+  damageCrateSpawnChange: 0.15
+  healthCrateSpawnChange: 0.05
 --- !u!1 &2037102838
 GameObject:
   m_ObjectHideFlags: 0

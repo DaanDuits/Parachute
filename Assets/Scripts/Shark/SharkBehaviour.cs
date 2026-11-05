@@ -7,13 +7,26 @@ namespace FoGD.Shark
     [RequireComponent(typeof(SpriteRenderer), typeof(CircleCollider2D))]
     public class SharkBehaviour : MonoBehaviour
     {
-        [Tooltip("The range between x and y the shark can be on on the x axis")][SerializeField] private Vector2 xPosRange = new Vector2(-8f, 8f);
-        [Tooltip("The range between x and y the shark can be on on the y axis")][SerializeField] private Vector2 yPosRange = new Vector2(-4f, 2f);
-        [Tooltip("The amount of time in seconds it takes the shark to go from a to b")][SerializeField] private float swimSpeed = 5f;
-        [Tooltip("The amount of time in seconds it takes the shark to jump")][SerializeField] private float jumpSpeed = 3f;
-        [Range(0f, 1f)][SerializeField] private float aggroToJump = 0.1f;
+        [Header("Movement")]
+        [Tooltip("The range between x and y the shark can be on on the x axis")]
+        [SerializeField] private Vector2 xPosRange = new Vector2(-8f, 8f);
+        [Tooltip("The range between x and y the shark can be on on the y axis")]
+        [SerializeField] private Vector2 yPosRange = new Vector2(-4f, 2f);
+        [Tooltip("The amount of time in seconds it takes the shark to go from a to b")]
+        [SerializeField] private float swimSpeed = 5f;
+        [Tooltip("The amount of time in seconds it takes the shark to jump")]
+        [SerializeField] private float jumpSpeed = 3f;
+        [Header("Hunger")]
+        [SerializeField] private float jumpCooldown = 4f;
+        [SerializeField] private float maxHunger = 50f;
+        [Tooltip("The ratio of hunger the shark needs to become aggressive")]
+        [Range(0f, 1f)][SerializeField] private float hungerRamp = 0.4f;
+        [SerializeField] private float hungerDepleteRate = 2f;
+        [Header("Gameplay")]
+        [SerializeField] private int damage = 1;
+        [SerializeField] private int scorePenalty = 100;
 
-        private float _aggression;
+        private float _hunger;
 
         private SharkAggressionStateBank _bank;
         private SpriteRenderer _renderer;
@@ -29,8 +42,10 @@ namespace FoGD.Shark
         { get => swimSpeed; }
         public float JumpSpeed
         { get => jumpSpeed; }
-        public float AggroToJump
-        { get => aggroToJump; }
+        public float HungerRamp
+        { get => hungerRamp; }
+        public float JumpCooldown
+        { get => jumpCooldown; }
         public SharkAggressionState CurrentState
         { get; set; }
         public int Direction
@@ -42,13 +57,19 @@ namespace FoGD.Shark
         }
         public Quaternion Rotation
         { set => transform.rotation = value; }
-        public float Aggression
+        public float MaxHunger
+        { get => maxHunger; }
+        public float Hunger
         {
-            get => _aggression;
-            set => _aggression = value;
+            get => _hunger;
+            set => _hunger = value;
         }
         public bool IsCollider
         { get => _collider.enabled; }
+        public bool IsStunned
+        { get; set; }
+        public float StunTime
+        { get; set; }
 
         private void Awake()
         {
@@ -61,12 +82,28 @@ namespace FoGD.Shark
             _renderer = GetComponent<SpriteRenderer>();
             _collider = GetComponent<CircleCollider2D>();
             EnableCollider(false);
+
+            _hunger = maxHunger;
         }
 
         private void Start()
         {
             GameManager.Instance.OnWin.AddListener(() => { Destroy(gameObject); });
             GameManager.Instance.OnLose.AddListener(() => { Destroy(gameObject); });
+            GameManager.Instance.ObstacleManager.OnObstacleMissed.AddListener(target => {
+                // If the target is shark food add the value
+
+                ISharkFood sharkFood = target as ISharkFood;
+                if (sharkFood != null)
+                    _hunger += ((ISharkFood)target).Value;
+
+                ISharkStunner sharkStunner = target as ISharkStunner;
+                if (sharkStunner != null)
+                {
+                    IsStunned = true;
+                    StunTime = ((ISharkStunner)target).Value;
+                }
+            });
         }
 
         private void Update()
@@ -89,9 +126,16 @@ namespace FoGD.Shark
             _collider.enabled = enabled;
         }
 
+        public void DepleteHunger()
+        {
+            _hunger -= hungerDepleteRate * Time.deltaTime;
+            _hunger = Mathf.Clamp(_hunger, 0f, maxHunger);
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            GameManager.Instance.RemoveHealth(1);
+            GameManager.Instance.RemoveHealth(damage);
+            GameManager.Instance.RemoveScore(scorePenalty);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using FoGD.Obstacles.Bank;
 
 namespace FoGD.Obstacles.Manager
@@ -19,11 +20,16 @@ namespace FoGD.Obstacles.Manager
         [Space]
         [Tooltip("The maximum change of a health crate spawning")][Range(0f, 1f)][SerializeField] private float healthCrateSpawnChange = 0.1f;
 
+        private UnityEvent<FallingObstacle> _onObstacleMissed = new UnityEvent<FallingObstacle>();
+
         private float _spawnTime;
 
         private ObstacleBank _bank;
 
         private IEnumerator _activeCoroutine;
+
+        public UnityEvent<FallingObstacle> OnObstacleMissed
+        { get => _onObstacleMissed; }
 
         private void Awake()
         {
@@ -80,8 +86,11 @@ namespace FoGD.Obstacles.Manager
             return Instantiate(obstacle, transform);
         }
 
-        public void DestroyObstacle(FallingObstacle target)
+        public void DestroyObstacle(FallingObstacle target, bool wasMiss)
         {
+            if (wasMiss)
+                _onObstacleMissed.Invoke(target);
+
             Destroy(target.gameObject);
         }
 

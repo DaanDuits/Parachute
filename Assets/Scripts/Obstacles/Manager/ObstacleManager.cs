@@ -30,14 +30,14 @@ namespace FoGD.Obstacles.Manager
             _bank = new ObstacleBank(factorySettings);
 
             _spawnTime = startSpawnTime;
-
-            _activeCoroutine = SpawnLoop();
-            StartCoroutine(_activeCoroutine);
         }
         private void Start()
         {
             GameManager.Instance.OnLose.AddListener(Stop);
             GameManager.Instance.OnWin.AddListener(Stop);
+
+            _activeCoroutine = SpawnLoop();
+            StartCoroutine(_activeCoroutine);
         }
 
         private IEnumerator SpawnLoop()
@@ -67,7 +67,7 @@ namespace FoGD.Obstacles.Manager
             // Calculate the damage crate spawn change based on the score percentage using an ease in curve
             float damageCrateChange = Mathf.Clamp(Mathf.Pow(GameManager.Instance.ScorePercentage, 2f), 0f, damageCrateSpawnChange);
 
-            // Calculate the health crate spawn change based on the inverted health percentage then use anpther ease in curve
+            // Calculate the health crate spawn change based on the inverted health percentage then use another ease in curve
             float healthInvert = 1f - GameManager.Instance.HealthPercentage;
             float healthCrateChange = damageCrateChange + Mathf.Clamp(Mathf.Pow(healthInvert, 2f) * healthCrateSpawnChange, 0f, healthCrateSpawnChange);
 

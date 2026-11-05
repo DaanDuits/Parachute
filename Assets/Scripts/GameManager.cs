@@ -61,12 +61,11 @@ namespace FoGD
             }
 
             Instance = this;
+            AddHealth(startHealth);
         }
 
         private void Start()
         {
-            AddHealth(startHealth);
-
             onScoreChanged.Invoke(_score);
             onHealthChanged.Invoke(_health);
         }

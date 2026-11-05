@@ -1,0 +1,26 @@
+:root {
+    background-color: rgb(47, 63, 94);
+}
+
+.screen-holder {
+    align-self: center;
+    align-items: center;
+}
+
+.panel-holder {
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    width: 300px;
+    align-items: center;
+}
+
+.condition-text {
+    font-size: 128px;
+    -unity-font-style: bold;
+    -unity-text-outline-width: 3px;
+    -unity-text-align: upper-center;
+}
+
+

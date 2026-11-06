@@ -33,6 +33,7 @@ namespace FoGD.UI.Behaviour
         {
             Document.enabled = true;
             SetCallbacks();
+            SetScore();
             Root.Q<Label>("condition-text").text = loseText;
             Document.panelSettings.themeStyleSheet = loseTheme;
         }
@@ -41,8 +42,14 @@ namespace FoGD.UI.Behaviour
         {
             Document.enabled = true;
             SetCallbacks();
+            SetScore();
             Root.Q<Label>("condition-text").text = winText;
             Document.panelSettings.themeStyleSheet = winTheme;
+        }
+
+        private void SetScore()
+        {
+            Root.Q<Label>("score-label").text = "Score: " + GameManager.Instance.Score;
         }
 
         private void SetCallbacks()

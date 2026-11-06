@@ -43,6 +43,8 @@ namespace FoGD
                 return (_health - 1) / (float)maxHealth;
             }
         }
+        public int Score
+        { get => _score; }
         public Vector3 PlayerPosition
         { get => playerTransform.position; }
 

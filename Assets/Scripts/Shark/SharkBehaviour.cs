@@ -23,6 +23,9 @@ namespace FoGD.Shark
         [Header("Gameplay")]
         [SerializeField] private int damage = 1;
         [SerializeField] private int scorePenalty = 100;
+        [Header("Audio")]
+        [SerializeField] private AudioSource chompSound; 
+        [SerializeField] private AudioSource splashSound;
 
         private float _hunger;
 
@@ -42,6 +45,10 @@ namespace FoGD.Shark
         { get => jumpSpeed; }
         public float JumpCooldown
         { get => jumpCooldown; }
+        public AudioSource ChompSound
+        { get => chompSound; }
+        public AudioSource SplashSound
+        { get => splashSound; }
         public SharkAggressionState CurrentState
         { get; set; }
         public int Direction
@@ -63,6 +70,8 @@ namespace FoGD.Shark
         public bool IsCollider
         { get => _collider.enabled; }
         public bool IsStunned
+        { get; set; }
+        public bool HasAttacked
         { get; set; }
         public float StunTime
         { get; set; }
@@ -132,6 +141,9 @@ namespace FoGD.Shark
         {
             GameManager.Instance.RemoveHealth(damage);
             GameManager.Instance.RemoveScore(scorePenalty);
+            chompSound.Play();
+            EnableCollider(false);
+            HasAttacked = true;
         }
     }
 }

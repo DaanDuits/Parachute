@@ -24,6 +24,8 @@ namespace FoGD.Shark.States
             int jumpDir = _startX > _targetX ? -1 : 1;
             if (jumpDir != Context.Direction)
                 Context.Flip();
+
+            Context.HasAttacked = false;
         }
         public override void UpdateState()
         {
@@ -51,7 +53,7 @@ namespace FoGD.Shark.States
             _timer += Time.deltaTime / Context.JumpSpeed;
             _timer = Mathf.Clamp01(_timer);
 
-            if (_timer >= 0.5f && !Context.IsCollider)
+            if (_timer >= 0.5f && !Context.IsCollider && !Context.HasAttacked)
             {
                 Context.EnableCollider(true);
             }
@@ -67,6 +69,7 @@ namespace FoGD.Shark.States
             // Reset rotation
             Context.Rotation = Quaternion.identity;
             Context.EnableCollider(false);
+            Context.SplashSound.Play();
         }
 
         protected override void CheckSwitchStates()

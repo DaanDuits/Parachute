@@ -7,6 +7,13 @@
     align-items: center;
 }
 
+.score-label {
+    font-size: 32px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    color: rgb(255, 255, 255);
+}
+
 .panel-holder {
     margin-top: auto;
     margin-right: auto;
@@ -22,5 +29,3 @@
     -unity-text-outline-width: 3px;
     -unity-text-align: upper-center;
 }
-
-

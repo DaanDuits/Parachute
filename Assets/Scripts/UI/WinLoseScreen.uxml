@@ -1,9 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Style/FoGD.uss?fileID=7433441132597879392&amp;guid=0cfcbd1e279d3684f9a739061aedb316&amp;type=3#FoGD"/>
+    <Style src="project://database/Assets/Scripts/UI/Style/WinLoseScreen.uss?fileID=7433441132597879392&amp;guid=27f53fd2e26b40b48b6c49089973dfab&amp;type=3#WinLoseScreen"/>
+    <Style src="project://database/Assets/Scripts/UI/Style/LoseScreen.uss?fileID=7433441132597879392&amp;guid=f7a0160855c55af4198dd057661fefa1&amp;type=3#LoseScreen"/>
     <ui:VisualElement class="screen-holder" style="flex-grow: 1;">
         <ui:VisualElement class="panel-holder">
             <ui:Label text="You Won" name="condition-text" class="condition-text"/>
-            <ui:Button text="Retry" name="retry-button"/>
-            <ui:Button text="Main Menu" name="main-menu-button"/>
+            <ui:Button text="Retry" name="retry-button" class="button"/>
+            <ui:Button text="Main Menu" name="main-menu-button" class="button"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -1,0 +1,70 @@
+:root {
+}
+
+.button {
+    font-size: 24px;
+    -unity-font-style: bold;
+    width: 405px;
+    height: 78px;
+    margin-bottom: 16px;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    border-left-color: rgb(0, 161, 100);
+    border-right-color: rgb(0, 161, 100);
+    border-top-color: rgb(0, 161, 100);
+    border-bottom-color: rgb(0, 161, 100);
+    background-color: rgb(43, 207, 212);
+    color: rgb(255, 255, 255);
+    transition-property: border-color, background-color;
+    transition-duration: 0.1s, 0.1s;
+}
+
+.button:hover {
+    font-size: 24px;
+    -unity-font-style: bold;
+    width: 405px;
+    height: 78px;
+    margin-bottom: 16px;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    border-left-color: rgb(15, 128, 52);
+    border-right-color: rgb(15, 128, 52);
+    border-top-color: rgb(15, 128, 52);
+    border-bottom-color: rgb(15, 128, 52);
+    background-color: rgb(36, 188, 85);
+    color: rgb(255, 255, 255);
+}
+
+.button:active {
+    font-size: 24px;
+    -unity-font-style: bold;
+    width: 405px;
+    height: 78px;
+    margin-bottom: 16px;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    border-left-color: rgb(35, 100, 226);
+    border-right-color: rgb(35, 100, 226);
+    border-top-color: rgb(35, 100, 226);
+    border-bottom-color: rgb(35, 100, 226);
+    background-color: rgb(64, 124, 209);
+    color: rgb(255, 255, 255);
+}

@@ -6,7 +6,8 @@ namespace FoGD.Shark.States.Bank
     {
         Aggressive,
         Passive,
-        Stunned
+        Stunned,
+        Cooldown
     }
 
     public class SharkAggressionStateBank
@@ -19,7 +20,8 @@ namespace FoGD.Shark.States.Bank
             {
                 { SharkAggressionStates.Aggressive, new SharkAggressiveState(context, this) },
                 { SharkAggressionStates.Passive, new SharkPassiveState(context, this) },
-                { SharkAggressionStates.Stunned, new SharkStunnedState(context, this) }
+                { SharkAggressionStates.Stunned, new SharkStunnedState(context, this) },
+                { SharkAggressionStates.Cooldown, new SharkCooldownState(context, this) }
             };
         }
 
@@ -34,6 +36,10 @@ namespace FoGD.Shark.States.Bank
         public SharkAggressionState StunnedState()
         {
             return _states[SharkAggressionStates.Stunned];
+        }
+        public SharkAggressionState CooldownState()
+        {
+            return _states[SharkAggressionStates.Cooldown];
         }
     }
 }

@@ -149,4 +149,6 @@ MonoBehaviour:
   xVelocityRange: {x: -4, y: 4}
   xPosRange: {x: -7, y: 7}
   minYPos: -6
+  landingSound: {fileID: 4735299075167437308, guid: 4d53d71e37bc5044784877b277a254b6, type: 3}
+  missSound: {fileID: 304000389789093815, guid: 82d74347c63bdce40a7d8c6f61494ae0, type: 3}
   healthAdded: 1

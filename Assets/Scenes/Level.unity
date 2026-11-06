@@ -154,9 +154,8 @@ MonoBehaviour:
   yPosRange: {x: -4, y: 3}
   swimSpeed: 5
   jumpSpeed: 3
-  jumpCooldown: 2
-  maxHunger: 50
-  hungerRamp: 0.1
+  jumpCooldown: 3
+  maxHunger: 30
   hungerDepleteRate: 2
   damage: 1
   scorePenalty: 100
@@ -1035,6 +1034,10 @@ PrefabInstance:
     - target: {fileID: 7780514349182397468, guid: 610d65654ffa45c49a2f9247b5a898d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537706044696214753, guid: 610d65654ffa45c49a2f9247b5a898d0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

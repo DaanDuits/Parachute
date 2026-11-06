@@ -47,7 +47,7 @@ namespace FoGD.Shark.States
             // Switch state when stunned or hungry
             if (Context.IsStunned)
                 SwitchState(Bank.StunnedState());
-            else if (Context.Hunger <= Context.HungerRamp * Context.MaxHunger)
+            else if (Context.Hunger == 0f)
                 SwitchState(Bank.AggressiveState());
         }
     }

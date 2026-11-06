@@ -19,8 +19,6 @@ namespace FoGD.Shark
         [Header("Hunger")]
         [SerializeField] private float jumpCooldown = 4f;
         [SerializeField] private float maxHunger = 50f;
-        [Tooltip("The ratio of hunger the shark needs to become aggressive")]
-        [Range(0f, 1f)][SerializeField] private float hungerRamp = 0.4f;
         [SerializeField] private float hungerDepleteRate = 2f;
         [Header("Gameplay")]
         [SerializeField] private int damage = 1;
@@ -42,8 +40,6 @@ namespace FoGD.Shark
         { get => swimSpeed; }
         public float JumpSpeed
         { get => jumpSpeed; }
-        public float HungerRamp
-        { get => hungerRamp; }
         public float JumpCooldown
         { get => jumpCooldown; }
         public SharkAggressionState CurrentState

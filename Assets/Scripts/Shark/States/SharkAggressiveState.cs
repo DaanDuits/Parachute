@@ -9,6 +9,7 @@ namespace FoGD.Shark.States
         private float _targetX;
 
         private float _timer = 0f;
+        private bool _isInCoolDown = false;
 
         public SharkAggressiveState(SharkBehaviour context, SharkAggressionStateBank bank) : base(context, bank)
         { }
@@ -26,6 +27,9 @@ namespace FoGD.Shark.States
         }
         public override void UpdateState()
         {
+            if (_isInCoolDown)
+                return;
+
             // Calculate new jump position
             float x = Mathf.Lerp(_startX, _targetX, _timer);
             float y = 4f * (Context.YPosRange.y - Context.YPosRange.x) * _timer * (1f - _timer) + Context.YPosRange.x;
@@ -67,14 +71,13 @@ namespace FoGD.Shark.States
 
         protected override void CheckSwitchStates()
         {
-            float cooldown = Random.value * Context.JumpCooldown;
-            Context.IsStunned = true;
-            Context.StunTime = cooldown;
 
             if (Context.IsStunned)
                 SwitchState(Bank.StunnedState());
-            else
+            else if (Context.Hunger > 0f)
                 SwitchState(Bank.PassiveState());
+            else
+                SwitchState(Bank.CooldownState());
         }
     }
 }

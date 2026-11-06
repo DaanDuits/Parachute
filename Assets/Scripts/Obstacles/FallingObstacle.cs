@@ -16,6 +16,7 @@ namespace FoGD.Obstacles
         [SerializeField] private Vector2 xVelocityRange = new Vector2(-4f, 4f);
         [SerializeField] private Vector2 xPosRange = new Vector2(-6f, 6f);
         [SerializeField] private float minYPos = -6f;
+        [SerializeField] private AudioSource landingSound, missSound;
 
         private float _xVelocity;
 
@@ -53,6 +54,8 @@ namespace FoGD.Obstacles
             if (transform.position.y <= minYPos)
             {
                 OnMiss();
+                AudioSource source = Instantiate(missSound);
+                source.Play();
                 Context.DestroyObstacle(this, true);
             }
         }
@@ -63,6 +66,8 @@ namespace FoGD.Obstacles
                 return;
 
             OnHitPlayer();
+            AudioSource source = Instantiate(landingSound);
+            source.Play();
             Context.DestroyObstacle(this, false);
         }
 
